@@ -3,9 +3,11 @@ package com.example.lx.fragmentdemo;
  *
  *
  * 类似这种界面逻辑用ViewPager+fragment处理较好，此demo只供理解fragment
- * 
+ *
  *
  * **********************************************************/
+
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -13,14 +15,14 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
-import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
-    private Fragment currentFragment=new Fragment();;
-    private Fragment1  first = new Fragment1();
-    private   Fragment2 second = new Fragment2();
-    private   Fragment3 third = new Fragment3();
+    private Fragment currentFragment = new Fragment();
+    ;
+    private Fragment1 first = new Fragment1();
+    private Fragment2 second = new Fragment2();
+    private Fragment3 third = new Fragment3();
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -51,6 +53,7 @@ public class MainActivity extends AppCompatActivity {
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
     }
+
     //Fragment优化
     private FragmentTransaction switchFragment(Fragment targetFragment) {
 
@@ -61,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
             if (currentFragment != null) {
                 transaction.hide(currentFragment);
             }
-            transaction.add(R.id.fragment, targetFragment,targetFragment.getClass().getName());
+            transaction.add(R.id.fragment, targetFragment, targetFragment.getClass().getName());
 
         } else {
             transaction
@@ -69,6 +72,12 @@ public class MainActivity extends AppCompatActivity {
                     .show(targetFragment);
         }
         currentFragment = targetFragment;
-        return   transaction;
+        return transaction;
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (second.isAdded())
+            second.show();
     }
 }

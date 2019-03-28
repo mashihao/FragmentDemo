@@ -42,4 +42,8 @@ public class Fragment2 extends Fragment {
         }
 
     }
+
+    public void show (){
+        Toast.makeText(getActivity(), "我是第二个Fragment 的方法", Toast.LENGTH_SHORT).show();
+    }
 }

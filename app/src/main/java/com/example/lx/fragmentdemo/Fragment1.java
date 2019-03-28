@@ -1,6 +1,7 @@
 package com.example.lx.fragmentdemo;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -25,6 +26,15 @@ public class Fragment1 extends Fragment {
                              Bundle savedInstanceState) {
         mView=inflater.inflate(R.layout.fragment_1, container, false);
         mTextView=(TextView) mView.findViewById(R.id.text1);
+
+
+        mTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivityForResult(new Intent(getActivity(), Main2Activity.class), 101);
+            }
+        });
+
         return mView;
     }
 //此方法在Fragment中
